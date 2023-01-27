@@ -1,0 +1,26 @@
+clear
+while read -p "Enter time in HH:MM:SS = " time
+do
+v_systime=`date +%H:%M:%S`
+oldIFS=$IFS
+IFS=':'
+set -- $time
+IFS=$oldIFS
+time=${#time}
+if (( $1 < 00  || $1 > 23 ));then
+echo "Invalid HOURS (HH) input value, enter 00-23 only"
+exit
+fi
+if (( $2 < 00  || $2 > 59 ));then
+echo "Invalid MINUTES (MM) input value, enter 00-59 only"
+exit
+fi
+if (( $3 < 00  || $3 > 59 ));then
+echo "Invalid SECONDS (SS) input value, enter 00-59 only"
+exit
+fi
+if (( $time > 8 ));then
+echo "Invalid time length, enter time in HH:MM:SS format"
+exit
+fi
+echo "Time entered is $time"
